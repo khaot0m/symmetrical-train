@@ -8,6 +8,10 @@ const books = [
     title: 'Jurassic Park',
     author: 'Michael Crichton',
   },
+  {
+    title: 'Jurassic Park',
+    author: 'Michael Crichton',
+  },
 ];
 
 module.exports = books;
