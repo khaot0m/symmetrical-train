@@ -1,11 +1,19 @@
 const { ApolloServer } = require('apollo-server');
 const mongoose = require('mongoose');
+const dotEnv = require('dotenv');
 
 const glue = require('schemaglue');
 
 const models = require('./models/index');
 
 const { schema, resolver } = glue('src/server/graphql');
+
+
+
+if (process.env.NODE_ENV === 'development') {
+  dotEnv.config({ path: './development.env' });
+}
+console.log(dotEnv, process.env.NODE_ENV);
 
 const server = new ApolloServer({
   typeDefs: schema,
@@ -24,9 +32,9 @@ const server = new ApolloServer({
   },
   context: { models }
 });
+console.log(process.env.DATABASE_URL);
+mongoose.connect(process.env.DATABASE_URL);
 
-mongoose.connect('mongodb://127.0.0.1/books');
-
-server.listen().then(({ url }) => {
+server.listen(process.env.PORT).then(({ url }) => {
   console.log(`🚀  Server ready at ${url}`);
 });
