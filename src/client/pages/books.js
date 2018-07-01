@@ -18,7 +18,7 @@ class BooksPage extends Component {
   _getBooks() {
     return this.props.data.books ?
       this.props.data.books.map(book => (
-        <Grid item xs={12} sm={12} md={6} lg={3} xl={4}>
+        <Grid item xs={12} sm={12} md={6} lg={3} xl={4} key={book.id}>
           <Book {...book} />
         </Grid>
       ))

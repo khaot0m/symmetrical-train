@@ -7,6 +7,7 @@ const Queries = {
     books{
       title
       author
+      id
     }
   }`
 

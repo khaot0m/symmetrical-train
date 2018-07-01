@@ -27,9 +27,8 @@ const styles = {
 
 function SimpleCard(props) {
   const { classes } = props;
-
   return (
-    <div>
+    <div key={props.id}>
       <Card className={classes.card}>
         <CardContent>
           <Typography className={classes.title} color="textSecondary">
@@ -58,6 +57,7 @@ SimpleCard.propTypes = {
   classes: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default withStyles(styles)(SimpleCard);
