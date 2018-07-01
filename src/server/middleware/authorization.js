@@ -3,7 +3,7 @@ const { User } = require('../models/index');
 async function authorization(req, res, next) {
   const token = req.headers.authorization;
   const user = await User.findOne({ token });
-  if (user || process.env.authorizationOff) {
+  if (user || process.env.AUTH_OFF) {
     next();
   } else {
     res.status = 403;

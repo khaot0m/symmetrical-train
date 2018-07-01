@@ -29,7 +29,10 @@ const apolloServer = new ApolloServer({
     console.log(response);
     return response;
   },
-  context: { models }
+  context: { models },
+  SubscriptionServerOptions: {
+    path: 'ws://127.0.0.1:4000'
+  }
 });
 
 mongoose.connect(process.env.DATABASE_URL);
