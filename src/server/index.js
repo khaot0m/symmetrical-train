@@ -1,21 +1,20 @@
-const { ApolloServer } = require('apollo-server');
+const express = require('express');
+const { ApolloServer } = require('apollo-server-express');
 const mongoose = require('mongoose');
 const dotEnv = require('dotenv');
-
 const glue = require('schemaglue');
-
+const auth = require('./middleware/authorization');
 const models = require('./models/index');
 
 const { schema, resolver } = glue('src/server/graphql');
-
+const app = express();
 
 
 if (process.env.NODE_ENV === 'development') {
   dotEnv.config({ path: './development.env' });
 }
-console.log(dotEnv, process.env.NODE_ENV);
 
-const server = new ApolloServer({
+const apolloServer = new ApolloServer({
   typeDefs: schema,
   resolvers: resolver,
   formatParams: (params) => {
@@ -32,9 +31,14 @@ const server = new ApolloServer({
   },
   context: { models }
 });
-console.log(process.env.DATABASE_URL);
+
 mongoose.connect(process.env.DATABASE_URL);
 
-server.listen(process.env.PORT).then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
+app.use(auth);
+apolloServer.applyMiddleware({ app });
+
+
+const expressServer = app.listen(process.env.PORT, () => {
+  console.log(`🚀  Server ready at ${expressServer.address().port}`);
 });
+

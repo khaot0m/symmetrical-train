@@ -9,3 +9,5 @@ subscriptions: https://blog.graph.cool/how-to-build-a-real-time-chat-with-graphq
 
 https://www.apollographql.com/docs/react/advanced/subscriptions.html
 schema design: https://keon.io/mongodb-schema-design/
+
+auth using JSON web Token: https://medium.freecodecamp.org/securing-node-js-restful-apis-with-json-web-tokens-9f811a92bb52

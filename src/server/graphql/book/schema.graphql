@@ -9,15 +9,26 @@ type Book {
   author: String
 }
 
+type User {
+  firstName: String
+  lastName: String
+  phone: String
+  email: String
+  token: String
+}
+
 type Query {
   books: [Book]
+  users: [User]
 
 }
 
 type Mutation {
   createBook(author: String!, title: String!): Book
+  createUser(firstName: String!,lastName: String!, phone: String, email: String!,token: String!): User
 }
 
 type Subscription{
   bookCreated: Book
+  userCreated: Book
 }
